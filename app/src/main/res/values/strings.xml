@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Sunlight App</string>
+    <string name="skin_color_app_bar">Skin Color</string>
+    <string name="skin_color_selection">Please select your skin color</string>
+    <string name="skin_exposure_app_bar">Skin Exposure</string>
+    <string name="skin_exposure_selection">Please select skin exposure percentage based on clothing</string>
+    <string name="sun_screen_app_bar">Sun Screen</string>
+    <string name="sun_screen_selection">Choose SPF level of your sunscreen</string>
+    <string name="sun_screen_tip">a</string>
+</resources>
