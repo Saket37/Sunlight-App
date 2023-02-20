@@ -20,3 +20,13 @@ val Medium = Color(0xFF8C624E)
 val MediumDark = Color(0xFF634B3F)
 val Dark = Color(0xFF544239)
 
+val color1 = Color(0xFFD84719)
+val color2 = Color(0xFFE9661D)
+val color3 = Color(0xFFD9DC31)
+val color4 = Color(0xFF3CC741)
+val color5 = Color(0xFF84D6E1)
+val color6 = Color(0xFF2C8EE9)
+val color7 = Color(0xFFB631E4)
+val color8 = Color(0xFFEB0EC7)
+
+val colorGradient = listOf(color1, color2, color3, color4, color5, color6, color7, color8)

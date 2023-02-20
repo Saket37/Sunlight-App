@@ -17,18 +17,18 @@ fun Navigation(
     startDestination: String = Routes.AppHome.path
 ) {
     NavHost(navController = navController, startDestination = startDestination) {
-        navigation(startDestination = Routes.SkinColor.path, route = Routes.AppHome.path) {
+        navigation(startDestination = Routes.Home.path, route = Routes.AppHome.path) {
             composable(route = Routes.Home.path) {
-                SunlightHome()
+                SunlightHome(navController)
             }
             composable(route = Routes.Clothing.path) {
-                SkinExposureScreen()
+                SkinExposureScreen(navController)
             }
             composable(route = Routes.SkinColor.path) {
-                SkinColorScreen()
+                SkinColorScreen(navController)
             }
             composable(route = Routes.SunScreen.path) {
-                SunScreenSPFScreen()
+                SunScreenSPFScreen(navController)
             }
         }
     }

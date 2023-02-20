@@ -2,6 +2,7 @@ package com.example.sunlightapp.ui.clothing
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -26,7 +27,8 @@ import com.example.sunlightapp.ui.theme.TransparentColor
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SkinExposureCard(
-    onClick: () -> Unit,
+    onClick: (Int) -> Unit,
+    index: Int,
     isSelected: Boolean,
     clothingImage: Int,
     clothingText: String
@@ -37,26 +39,26 @@ fun SkinExposureCard(
         TransparentColor.copy(0.38f)
     }
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        onClick = { onClick() },
-        shape = RoundedCornerShape(16.dp),
         backgroundColor = cardColor,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick.invoke(index) },
+        shape = RoundedCornerShape(16.dp),
         contentColor = Color.White
     ) {
         ConstraintLayout(
             modifier = Modifier
-                .background(cardColor)
                 .padding(top = 8.dp, bottom = 2.dp)
         ) {
             val (content, selected) = createRefs()
-            CardContent(modifier = Modifier
-                .background(cardColor)
-                .constrainAs(content) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(parent.bottom)
-                }, clothingImage = clothingImage, clothingText = clothingText
+            CardContent(
+                modifier = Modifier
+                    .constrainAs(content) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom)
+                    }, clothingImage = clothingImage, clothingText = clothingText
             )
             if (isSelected) {
                 Image(
@@ -93,6 +95,6 @@ fun SkinExposureCardPreview() {
         onClick = { },
         isSelected = false,
         clothingImage = R.drawable.ic_clothing_w20,
-        clothingText = "40%"
+        clothingText = "40%", index = 0
     )
 }

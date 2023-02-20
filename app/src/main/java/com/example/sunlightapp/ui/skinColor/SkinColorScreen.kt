@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.sunlightapp.R
 import com.example.sunlightapp.ui.components.TopAppBar
@@ -27,9 +28,8 @@ import com.example.sunlightapp.utils.SkinColorEvent
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SkinColorScreen() {
+fun SkinColorScreen(navController: NavHostController = rememberNavController()) {
     val viewModel: SkinColorViewModel = hiltViewModel()
-    val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(topBar = {
@@ -47,8 +47,7 @@ fun SkinColorScreen() {
 
 @Composable
 fun SkinColorScreenContent(uiState: SkinColorState, handleEvent: (event: SkinColorEvent) -> Unit) {
-    //var selectedIndex by remember { mutableStateOf(0) }
-    //val onItemClick = { index: Int -> selectedIndex = index }
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.Start) {
             Text(

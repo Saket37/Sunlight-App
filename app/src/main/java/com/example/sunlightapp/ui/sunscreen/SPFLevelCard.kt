@@ -1,6 +1,7 @@
 package com.example.sunlightapp.ui.sunscreen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,10 +22,14 @@ import com.example.sunlightapp.ui.theme.CardColor
 import com.example.sunlightapp.ui.theme.TransparentColor
 
 @Composable
-fun SPFLevelCard(spfLevelText: String, isSelected: Boolean) {
+fun SPFLevelCard(
+    spfLevelText: String, isSelected: Boolean, onClick: (Int) -> Unit, index: Int
+) {
     val cardColor = if (isSelected) CardColor.copy(.4f) else TransparentColor.copy(.38f)
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick.invoke(index) },
         backgroundColor = cardColor,
         contentColor = Color.White, shape = RoundedCornerShape(8.dp)
     ) {
@@ -43,5 +48,5 @@ fun SPFLevelCard(spfLevelText: String, isSelected: Boolean) {
 @Preview
 @Composable
 fun SPFLevelCardPreview() {
-    SPFLevelCard(spfLevelText = "SPF 15", isSelected = true)
+    SPFLevelCard(spfLevelText = "SPF 15", isSelected = true, onClick = {}, index = 0)
 }

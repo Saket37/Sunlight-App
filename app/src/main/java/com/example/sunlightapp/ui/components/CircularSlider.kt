@@ -7,11 +7,13 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.onGloballyPositioned
+import com.example.sunlightapp.ui.theme.colorGradient
 import kotlin.math.*
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -23,7 +25,7 @@ fun CircularSlider(
     cap: StrokeCap = StrokeCap.Round,
     touchStroke: Float = 50f,
     thumbColor: Color = Color.White,
-    progressColor: Color = Color.Green,
+    progressColor: Brush = Brush.horizontalGradient(colorGradient),
     backgroundColor: Color = Color.White,
     debug: Boolean = false,
     onChange: ((Float) -> Unit)? = null,
@@ -98,7 +100,7 @@ fun CircularSlider(
             )
         )
         drawArc(
-            color = progressColor,
+            brush = progressColor,
             startAngle = 120f,
             sweepAngle = appliedAngle,
             topLeft = center - Offset(radius, radius),

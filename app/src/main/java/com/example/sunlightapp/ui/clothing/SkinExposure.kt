@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
@@ -17,18 +17,19 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.sunlightapp.R
 import com.example.sunlightapp.ui.clothing.viewModel.ClothingState
 import com.example.sunlightapp.ui.clothing.viewModel.SkinExposureViewModel
 import com.example.sunlightapp.ui.components.TopAppBar
+import com.example.sunlightapp.utils.ClothingEvent
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SkinExposureScreen() {
+fun SkinExposureScreen(navController: NavHostController = rememberNavController()) {
     val viewModel: SkinExposureViewModel = hiltViewModel()
-    val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(topBar = {
@@ -37,12 +38,15 @@ fun SkinExposureScreen() {
             onNavClick = { },
             onActionClick = {})
     }, scaffoldState = scaffoldState) {
-        SkinExposureContent(uiState = viewModel.uiState.collectAsStateWithLifecycle().value)
+        SkinExposureContent(
+            uiState = viewModel.uiState.collectAsStateWithLifecycle().value,
+            handleEvent = viewModel::handleEvent
+        )
     }
 }
 
 @Composable
-fun SkinExposureContent(uiState: ClothingState) {
+fun SkinExposureContent(uiState: ClothingState, handleEvent: (event: ClothingEvent) -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.Start) {
             Text(text = stringResource(id = R.string.skin_exposure_selection))
@@ -52,12 +56,20 @@ fun SkinExposureContent(uiState: ClothingState) {
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(top = 10.dp)
             ) {
-                items(uiState.clothing) {
+                itemsIndexed(items = uiState.clothing) { index, item ->
                     SkinExposureCard(
-                        onClick = { },
-                        isSelected = false,
-                        clothingImage = it.image,
-                        clothingText = it.percentage
+                        onClick = {
+                            handleEvent(
+                                ClothingEvent.SelectedType(
+                                    index = index,
+                                    selectedClothing = item.percentage
+                                )
+                            )
+                        },
+                        index = index,
+                        isSelected = uiState.selectedIndex == index,
+                        clothingImage = item.image,
+                        clothingText = item.percentage
                     )
                 }
             }
