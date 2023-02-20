@@ -18,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.sunlightapp.R
 import com.example.sunlightapp.ui.clothing.viewModel.ClothingState
@@ -35,7 +36,7 @@ fun SkinExposureScreen(navController: NavHostController = rememberNavController(
     Scaffold(topBar = {
         TopAppBar(
             title = stringResource(id = R.string.skin_exposure_app_bar),
-            onNavClick = { },
+            onNavClick = { if (navController.previousBackStackEntry != null) navController.navigateUp() },
             onActionClick = {})
     }, scaffoldState = scaffoldState) {
         SkinExposureContent(

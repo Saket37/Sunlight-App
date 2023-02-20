@@ -36,7 +36,7 @@ fun SunScreenSPFScreen(navController: NavHostController = rememberNavController(
     Scaffold(topBar = {
         TopAppBar(
             title = stringResource(id = R.string.sun_screen_app_bar),
-            onNavClick = { /*TODO*/ },
+            onNavClick = { if (navController.previousBackStackEntry != null) navController.navigateUp() },
             onActionClick = {})
     }, scaffoldState = scaffoldState) {
         SunScreenSPFScreenContent(

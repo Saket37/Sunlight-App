@@ -57,9 +57,8 @@ fun SunlightHome(navController: NavHostController = rememberNavController()) {
                 bottomSheetState.progress.from
             )
         },
-        sheetElevation = 16.dp,
+        sheetElevation = 24.dp,
         sheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-        backgroundColor = TransparentColor.copy(0.38f),
         topBar = {
             com.example.sunlightapp.ui.components.TopAppBar(
                 title = "Bengaluru, Karnataka",
@@ -84,7 +83,7 @@ data class CardButton(val text: String, val color: Color)
 
 val cardButton =
     listOf<CardButton>(CardButton("SCHEDULE", GreenButton), CardButton("START", BlueButton))
-
+// TODO - Error loading data from datastore to display in cards
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SheetContent(

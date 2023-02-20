@@ -35,7 +35,7 @@ fun SkinColorScreen(navController: NavHostController = rememberNavController()) 
     Scaffold(topBar = {
         TopAppBar(
             title = stringResource(id = R.string.skin_color_app_bar),
-            onNavClick = { },
+            onNavClick = { if (navController.previousBackStackEntry != null) navController.navigateUp() },
             onActionClick = {})
     }, scaffoldState = scaffoldState) {
         SkinColorScreenContent(
